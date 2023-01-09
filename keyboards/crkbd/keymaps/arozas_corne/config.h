@@ -1,3 +1,4 @@
+#include "config_common.h"
 /*
 This is the c configuration file for the keymap
 
