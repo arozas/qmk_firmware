@@ -1,4 +1,5 @@
-# Corne Dvorak Layout by Alejandro Rozas.
+# La Mazorca
+## A Corne Keyboard Dvorak layout by Alejandro Rozas.
 
 ![Layout](https://user-images.githubusercontent.com/1832140/178291869-ea3c070b-2c0d-45f9-aeb8-00ac6942e847.png)
 
