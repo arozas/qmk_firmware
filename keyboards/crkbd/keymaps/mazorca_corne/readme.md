@@ -1,9 +1,11 @@
 # Mazorca - Corne.
-### A Corne Keyboard layout by Alejandro Rozas.
-
-<div align="center">
+<h2> A Corne Keyboard layout by Alejandro Rozas. </h2>
+<div align="left">
   <a href="https://github.com/arozas/qmk_firmware/blob/master/keyboards/crkbd/keymaps/mazorca_corne/Images/CorneLogo.png">
-    <img src="https://github.com/arozas/qmk_firmware/blob/master/keyboards/crkbd/keymaps/mazorca_corne/Images/CorneLogo.png" alt="Logo" width="200" height="200">
+    <img src="https://github.com/arozas/qmk_firmware/blob/master/keyboards/crkbd/keymaps/mazorca_corne/Images/CorneLogo.png" alt="Corne Logo" height="50">
+  </a>
+    <a href="https://qmk.fm/assets/images/badge-community-light.svg">
+    <img src="https://qmk.fm/assets/images/badge-community-light.svg" alt="QMK Logo" height="50">
   </a>
 </div>
 
