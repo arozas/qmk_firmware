@@ -1,6 +1,6 @@
 <div align="center">
   <a href="https://github.com/arozas/qmk_firmware/blob/master/keyboards/crkbd/keymaps/mazorca_corne/Images/CorneLogo.png">
-    <img src="https://github.com/arozas/qmk_firmware/blob/master/keyboards/crkbd/keymaps/mazorca_corne/Images/CorneLogo.png" alt="Logo" width="500" height="500">
+    <img src="https://github.com/arozas/qmk_firmware/blob/master/keyboards/crkbd/keymaps/mazorca_corne/Images/CorneLogo.png" alt="Logo" width="200" height="200">
   </a>
 </div>
 
