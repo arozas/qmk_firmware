@@ -2,7 +2,7 @@
 ### A Corne Keyboard layout by Alejandro Rozas.
 
 ## About.
-* mazorca = f — cob s·, ear s·, corncob s·
+> mazorca = f — cob s·, ear s·, corncob s·
 
 ## The Layout:
 
