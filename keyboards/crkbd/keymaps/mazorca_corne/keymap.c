@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include QMK_KEYBOARD_H
 #include <stdio.h>
-//#include "custom_color.h"
+#include "led_mapping.h"
 
 char wpm_str[10];
 
@@ -31,20 +31,29 @@ enum layers {
     _GAMING
 };
 
+//custom keycodes:
 enum {
     TD_CAPS,
     TD_QWERTY,
-    TD_GAME
+    TD_GAME,
+    TD_LBRK,
+    TD_RBRK,
+    TD_LPRB,
+    TD_RPRB,
+    TD_BSLS,
+    TD_SFBT,
+    TD_SLEQ,
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+
   [_DVORAK] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-       KC_TAB,    KC_QUOT,    KC_COMM,    KC_DOT,    KC_P,    KC_Y,                         KC_F,    KC_G,    KC_C,    KC_R,   KC_L,  KC_BSPC,
+       KC_TAB, KC_QUOT, KC_COMM,  KC_DOT,    KC_P,    KC_Y,                         KC_F,    KC_G,    KC_C,    KC_R,    KC_L, KC_BSPC,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LCTL,    KC_A,    KC_O,    KC_E,    KC_U,    KC_I,                         KC_D,    KC_H,    KC_T,    KC_N, KC_S, KC_MINS,
+      KC_LCTL,    KC_A,    KC_O,    KC_E,    KC_U,    KC_I,                         KC_D,    KC_H,    KC_T,    KC_N,    KC_S, KC_MINS,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-   TD(TD_CAPS),    KC_SCLN,    KC_Q,    KC_J,    KC_K,    KC_X,                         KC_B,    KC_M, KC_W,  KC_V, KC_Z,  KC_ESC,
+     TD(TD_CAPS), KC_SCLN,    KC_Q,    KC_J,    KC_K,    KC_X,                      KC_B,    KC_M,    KC_W,    KC_V,    KC_Z,  KC_ESC,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                     TD(TD_QWERTY),   MO(1),  KC_SPC,     KC_ENT,   MO(2), TD(TD_GAME)
                                       //`--------------------------'  `--------------------------'
@@ -53,11 +62,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_NUMBER] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-       _______,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,    KC_7,    KC_8,    KC_9,    KC_0, KC_BSPC,
+       C(KC_X), TD(TD_SFBT), KC_F2, KC_F3,   KC_F4, KC_VOLU,                      KC_KP_9, KC_KP_8, KC_KP_7, KC_PMNS, KC_PSLS, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-       _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT, XXXXXXX, XXXXXXX,
+       C(KC_C),   KC_F5,   KC_F6,   KC_F7,   KC_F8, KC_VOLD,                      KC_KP_4, KC_KP_5, KC_KP_6, KC_PPLS, KC_PAST, KC_NUM,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-       _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+       C(KC_V),   KC_F9,  KC_F10,  KC_F11,  KC_F12, KC_MUTE,                      KC_KP_1, KC_KP_2, KC_KP_3, KC_KP_0, KC_EQL, KC_PDOT,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                          _______, _______,  _______,     _______,   MO(3), _______
                                       //`--------------------------'  `--------------------------'
@@ -65,11 +74,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_SYMBOL] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-       _______, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                      KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_BSPC,
+       _______, KC_EXLM,  KC_AT, KC_HASH,  TD(TD_BSLS), TD(TD_SLEQ),             XXXXXXX, KC_PSCR, KC_SCRL, KC_PAUS, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-       _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      KC_MINS,  KC_EQL, KC_LBRC, KC_RBRC, KC_BSLS,  KC_GRV,
+       _______, KC_DLR, KC_PERC, KC_CIRC, TD(TD_LPRB), TD(TD_RPRB),              XXXXXXX,  KC_INS, KC_HOME, KC_PGUP, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-       _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, KC_PIPE, KC_TILD,
+       _______, KC_AMPR, KC_ASTR, KC_QUES, TD(TD_LBRK), TD(TD_RBRK),             XXXXXXX,  KC_DEL,  KC_END, KC_PGDN, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                          _______,   MO(3),  _______,     _______, _______, _______
                                       //`--------------------------'  `--------------------------'
@@ -77,7 +86,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_ADJUST] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      QK_BOOT, QK_BOOTLOADER, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+      QK_BOOT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
@@ -102,11 +111,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_GAMING] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      KC_TAB,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                         KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,  KC_BSPC,
+      KC_TAB,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                      KC_KP_9, KC_KP_8, KC_KP_7, KC_PMNS, KC_PSLS, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LCTL,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                         KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN, KC_QUOT,
+      KC_LSFT,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                     KC_KP_4, KC_KP_5, KC_KP_6, KC_PPLS, KC_PAST, KC_NUM,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,  KC_ESC,
+      KC_LCTL ,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                     KC_KP_1, KC_KP_2, KC_KP_3, KC_KP_0, KC_PEQL, KC_PDOT,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                  TD(TD_QWERTY),   _______,  _______,     _______,   _______, TD(TD_GAME)
                                       //`--------------------------'  `--------------------------'
@@ -114,15 +123,29 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 };
 
+#ifdef TAP_DANCE_ENABLE
 // Tap Dance definitions
 qk_tap_dance_action_t tap_dance_actions[] = {
     // Tap once for Left Shift, twice for Caps Lock
-    [TD_CAPS] = ACTION_TAP_DANCE_DOUBLE(KC_LSFT, KC_CAPS),
+    [TD_CAPS]   =   ACTION_TAP_DANCE_DOUBLE(KC_LSFT, KC_CAPS),
     // Tap once for LGui, twice for toggle to Qwerty Layer
-    [TD_QWERTY] = ACTION_TAP_DANCE_LAYER_TOGGLE(KC_LGUI,4),
+    [TD_QWERTY] =   ACTION_TAP_DANCE_LAYER_TOGGLE(KC_LGUI, 4),
     // Tap once for Right Alt, twice for toggle to Game Layer
-    [TD_GAME] = ACTION_TAP_DANCE_LAYER_TOGGLE(KC_LGUI,5),
+    [TD_GAME]   =   ACTION_TAP_DANCE_LAYER_TOGGLE(KC_RALT, 5),
+    // Tap once for curly brackets, twice square brackets
+    [TD_LBRK]   =   ACTION_TAP_DANCE_DOUBLE(KC_LBRC, LSFT(KC_LBRC)),
+    [TD_RBRK]   =   ACTION_TAP_DANCE_DOUBLE(KC_RBRC, LSFT(KC_RBRC)),
+    // Tap once for parentheses, twice for angle bracket
+    [TD_LPRB]   =   ACTION_TAP_DANCE_DOUBLE(KC_LPRN, KC_LT),
+    [TD_RPRB]   =   ACTION_TAP_DANCE_DOUBLE(KC_RPRN, KC_GT),
+    // Tap once for backslash, twice for pipe.
+    [TD_BSLS]   =   ACTION_TAP_DANCE_DOUBLE(KC_BSLS, LSFT(KC_BSLS)),
+    // Tap once for F1, twice for boot.
+    [TD_SFBT]   =   ACTION_TAP_DANCE_DOUBLE(KC_F1, QK_BOOTLOADER),
+    // Tap once for slash, twice for equals
+    [TD_SLEQ]   =   ACTION_TAP_DANCE_DOUBLE(KC_PSLS, KC_EQL)
 };
+#endif // TAP_DANCE_ENABLE
 
 #ifdef OLED_ENABLE
 
@@ -245,6 +268,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 }
 #endif // OLED_ENABLE
 
+#ifdef RGB_MATRIX_ENABLE
+
 extern led_config_t g_led_config;
 
 void rgb_matrix_layer_helper(uint8_t hue, uint8_t sat, uint8_t val, uint8_t led_min, uint8_t led_max) {
@@ -283,11 +308,12 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
             case _QWERTY:
                 rgb_matrix_layer_helper(HSV_BLUE, led_min, led_max);
                 break;
-            case _NUMBER:;
-                int numpad_numbers[] = {37, 38, 39, 43, 44, 45, 49, 50, 51};
-                for (int j = 0; j < 8; ++j) {
-                    rgb_matrix_layer_helper_per_key(HSV_GREEN, led_min, led_max, numpad_numbers[j]);
-                }
+            case _GAMING:
+                rgb_matrix_layer_helper(HSV_GREEN, led_min, led_max);
+                //rgb_matrix_layer_helper_per_key(HSV_GREEN, led_min, led_max, LED_9);
+                //rgb_matrix_layer_helper_per_key(HSV_GREEN, led_min, led_max, LED_14);
+                //rgb_matrix_layer_helper_per_key(HSV_GREEN, led_min, led_max, LED_15);
+                //rgb_matrix_layer_helper_per_key(HSV_GREEN, led_min, led_max, LED_16);
                 break;
             default:
                 break;
@@ -295,3 +321,4 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
   }
   return false;
 }
+#endif // RGB_MATRIX_ENABLE
